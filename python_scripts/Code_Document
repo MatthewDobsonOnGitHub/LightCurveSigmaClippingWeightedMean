@@ -1,0 +1,142 @@
+FLUX VS TIME CODE
+
+This is a document that summarises the purpose and workings of the "Flux vs Time" code.
+
+The main purpose of the code is to input the raw photometry data of an observed transient - deemed a supernova through prior manual analysis - and output both the flux of the transient as a function of time, and a plot of flux against time. This will allow us to analyse the temporal evolution of a transient's  brightness to ascertain the explosion epoch of a supernova (this is hard to observe normally, as it is statistically vanishing that a given observation will observe the exact moment that the supernova occurs).
+
+
+IMPORTING DATA
+
+An observed transient will be confirmed to be 'real' and its data stored in the ATLAS database. The raw data file contains several quantities necessary to calculate the flux value of a given measurement in units of microjanskys:
+
+	1. The magnitude of the zero point datum, zp, (defined here as the brightness of an object that 	   produces a detector count of one photon per second).
+	2. The detector exposure time, exptime, (set to be 30 seconds)
+	3. apfit
+	4. major
+	5. minor
+	6. peakfit
+	7. dpeak
+	8. The time at which a measurement was taken (in units of MJD - Mean Julian Date)
+	9. The wavelength filter used for the measurement - either orange ('o') or cyan ('c')
+
+All of the quantities listed above are imported into the code using the function csv.DictReader, which turns the .csv file containing the raw transient data into an array, with each element being a dictionary. Each dictionary represents the raw data associated with a given measurement, with its own timestamp in units of MJD.
+
+
+EXTRACTING DATA
+
+As the brightness of an object will depend on the wavelength measured at, the data points taken with each filter MUST be treated separately. 
+
+This is where importing the data in dictionary form becomes useful. 
+
+Firstly, empty arrays are created for the quantities of every brightness measurement, one for each wavelength filter used (for example, we will have a time array for the orange filter, and a separate time array for the cyan filter).
+
+A for loop is used to cycle through all the dictionaries; a logical condition checks the lens used for the measurement to which a given dictionary corresponds, and sorts all the quantities in the dictionary into the corresponding arrays for the appropriate filter.
+
+These quantities are then used to calculate the flux and the associated uncertainty for each measurement, for each filter, using the following equations for flux:
+
+
+
+and its associated uncertainty:
+
+
+
+This is done using four for loops, with the flux values and uncertainties for each filter appended to previously-empty arrays. 
+
+The result is the following six arrays:
+
+	1) flux (orange filter)
+	2) error (orange filter)
+	3) times (orange filter)
+	4) flux (cyan filter)
+	5) error (cyan filter)
+	6) times (cyan filter)
+
+
+BINNING DATA BY DAY OF MEASUREMENT
+
+Some observations were taken on the same day, but not at the exact same time. Thus, we must find a weighted average of all the flux measurements in a given day, requiring all the measurements to be 'binned' by their day of observation.
+
+To do this, the floor function is applied to the time arrays for each filter, and any duplication in the results eliminatied, leaving two arrays that contain the dates of observations for each filter. These arrays of dates will be used to bin the times by comparing the floored value of a give time to a date in the array for the corresponding filter.
+
+
+WEIGHTED AVERAGES
+
+Each datapoint has a significant associated uncertainty in its flux value, but the time of measurement is known to a very large degree of accuracy. This means that the Weighted Least Mean Squares method is applicable to calculate the weighted average of the flux for each date of measurement. 
+
+The weighted mean is given by the following equation:
+
+x_bar = sum(weight_i*x_i)/sum(weight_i)
+
+where the weight of each ith measurement is equal to the inverse square of its associated uncertainty value. Furthermore, as the uncertainties in measurement times are equal and small, we can use the normal mean to calculate the average time of measurement on a given date.
+
+This method is applied to all the data points measured in a day, separately for each filter, to calculate the weighted mean of the flux values in a day. But how are the measurements sorted by date? To do this, a set of nested for loops is used. For a given filter, the outer for loop runs through the list of dates, while the nested, inner loop runs through all the times of every measurement made. A logical condition is made that if the floored value of a measurement time is equal to a date value in the date array, then the time value is summed to a cumulative total, and the flux value corresponding to that measurement time is multiplied by its weight, and the product summed to a cumulative total. Counters for both time and weighted flux are used both to calculate the divisor of time and keep track of the last analysed element in the array of measurement times. The summation for a given day ends when the inner loop breaks, and the results of the iteration - the values of summed time and summed weighted flux - are appended to empty arrays of the same length as that for the list of dates. When all the time values have been exhausted, the summed values of time and weighted flux are divided by the time divisor and summed weights, respectively.
+
+The result is the following arrays:
+
+	1) time (orange filter)
+	2) time (cyan filter)
+	3) weighted mean flux (orange filter)
+	4) weighted mean flux (cyan filter)
+
+
+ERRORS OF WEIGHTED MEAN FLUXES
+
+The error of the weighted mean values of flux is taken to be the standard deviation of all the flux values in a given day. However, this is not applicable to days where only one measurement occurs (as its distance from the mean is, naturally, zero; and the denominator for the standard deviation of a single point is zero). Therefore, logical conditions are required to discern these two situations.
+
+To calculate the denominator of the standard deviation expression for every averaged point, the floored time condition is used again within two nested loops (outer loops through dates, the inner through measurement times). If the floor of a measurement time value is equal to a value in the date list, a counter will be summed to a cumulative total. When this condition is no longer true i.e. when we have entered a new Julian day, the cumulative total is appended to an array called 'denom_x' where x is the letter corresponding to the filter used ('o' for orange and 'c' for cyan). All elements in this array are then subtracted by one.
+
+To calculate the numerator, two nested for loops are used again: the outer cycles through the array of dates, and the inner through all the measurement times for a given filter. 
+
+If the denominator value for a given day is not equal to zero, and if a measurement time equates to a given date, the value of that flux measurement is subtracted from the weighted mean flux value, the difference squared, and the resulting value added to a cumulative sum. This repeats for all measurement in a day, and all values calculated are appended to new arrays.
+
+If the denominator is equal to zero i.e. if only one measurement occured on that day, the numerator is set simply to the uncertainty associated with that flux measurement. Both these values are still appended to the arrays of numerator and denominator.
+
+The calculation of the final standard deviation value relies on these conditions also. 
+
+If the denominator for a given day is equal to zero, then its value is set to one, and the "standard deviation" simply the ratio of the lone measurement's uncertainty divided by the number of measurements (i.e. its error divided by one).
+
+If more than one measurement occured on a given day (i.e. theat day's standard deviation denominator is not equal to zero), its variance is the ratio of the sum of the square differences divided by the appropriate denominator value, and the standard deviation th square root of the variance.
+
+The result is the following arrays:
+
+	1) time (orange filter)
+	2) time (cyan filter)
+	3) weighted mean flux (orange filter)
+	4) weighted mean flux (cyan filter)
+	5) standard deviation of weighted mean flux (orange filter)
+	5) standard deviation of weighted mean flux (cyan filter)
+
+
+DATA PLOTTING AND FILE WRITING
+
+The weighted mean flux values for both filters, and their associated uncertainties (the standard deviation of all averaged flux values) are plotted against the average time values using the plt.errorbar function twice (once for each filter). On the same plot, the measured flux values for both filters are plotted against their corresponding times, with a transparency setting of alpha=0.2, to bring the weighted values to the fore.
+
+To write this calculated data to a text file, the arrays of measured time, measured flux and associated flux error for a given filter are ordered into an array. The same is done for the mean time, weighted mean flux, its associated error, and the number of datapoints averaged to the weighted mean into another array. This is done for both filters. The arrays of data are then transposed into columns.
+
+The following syntax is used to write the transposed arrays into a file:
+
+	with open("filename", 'w') as datafile_id:
+
+		np.savetxt(datafile_id, transposed_array_1, ... )
+		np.savetxt(datafile_id, transposed_array_2, ... )
+		.
+		.
+		.
+
+This will print to the file of name "filename": the measurement times, flux values and uncertainties of the orange filter, followed by those for the cyan filter; then the mean time, weighted mean flux, associated flux uncertainty and number of data points averaged for the orange filter, then as before for the cyan filter.
+
+The fmt parameter for the numpy.savetxt file is determined by the number of columns in the array being written to the file and the format of the data in each array - %s corresponds to a string, %d to an integer, %f to float.
+
+The delimiter parameter determines how columns in the data are separated - here, the delimiter is set to be '\t\t' - two tab spacing.
+
+The function has parameters that allow addition of headers and footers. In this code the header decribes the contents of the collowing columns, and the footer is a new line to separate the stacks of columns.
+
+The result is, after the values of weighted mean flux and average time are calculated, a plot of flux against time is produced, showing all the measured data points in translucent, faded colours, with the weighted mean values of the flux plotted against the average time fo measurement for a given day in stronger colours. The code prints to a text file the time, flux value and flux error of all measurements, separated by filter, followed by the average time, weighted mean flux, asociated uncertainty (standard deviation) and number of points averaged per mean value. 
+
+
+
+
+
+
+
+

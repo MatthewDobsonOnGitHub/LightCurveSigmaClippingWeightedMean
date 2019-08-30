@@ -1,0 +1,34 @@
+#!/bin/tcsh
+#!
+#!
+#--------------------------------------------------------------------------
+# set the root directory name dfits and fitsort 
+# ***************************************************
+#set fitsdr             = /Users/sjs/soft/fits
+set fitsdr              = /home/sjs/soft/bin
+
+#--------------------------------------------------------------------------
+# set the root directory name for ML and HK data 
+# ***************************************************
+#
+
+#Temp for tes
+#set hkdata_dir          = /Users/sjs/data/ATLAS/zeropoints
+set hkdata_dir          = /data/dbstore4/psat04/atlas/red/02a/58431
+#set mldata_dir         = /data/dbstore4/psat04/atlas/red/01a
+
+#cp /data/dbstore4/psat04/atlas/red/02a/58433/02a58433o0752c.fits.fz .
+#/home/sjs/soft/cfitsio/funpack 02a58433o0752c.fits.fz 
+
+set filelist2 = `ls $hkdata_dir/*.fz`
+
+echo "FILE                                                	MJD-OBS       	CAMID   	FILTER	MAGZPT	MAG5SIG	AIRMASS	SEEING	SKYMAG	CLOUD	MOONSKY	MANGLE" > zeropoints.dat
+
+#foreach file1 ($filelist1[*])
+#  /atlas/bin/funpack $file1
+   
+#    set filelist2 = `ls $hkdata_dir/*.fits`
+    foreach file2 ($filelist2[*])
+    $fitsdr/dfits -x 1 $file2 | $fitsdr/fitsort MJD-OBS CAMID FILTER MAGZPT MAG5SIG AIRMASS  SEEING SKYMAG CLOUD MOONSKY MANGLE | grep -v 'FILE' >> zeropoints.dat
+    end
+#end 

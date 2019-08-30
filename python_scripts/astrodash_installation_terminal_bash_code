@@ -1,0 +1,221 @@
+(base) [mdobson@minnesota python_scripts]$ source activate astrodash
+(astrodash) [mdobson@minnesota python_scripts]$ conda install tensorflow
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/mdobson/anaconda3/envs/astrodash
+
+  added / updated specs:
+    - tensorflow
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    _tflow_select-2.3.0        |              mkl           2 KB
+    absl-py-0.7.1              |           py37_0         157 KB
+    astor-0.8.0                |           py37_0          45 KB
+    c-ares-1.15.0              |    h7b6447c_1001         102 KB
+    gast-0.2.2                 |           py37_0         137 KB
+    google-pasta-0.1.7         |             py_0          41 KB
+    grpcio-1.16.1              |   py37hf8bcb03_1         1.0 MB
+    intel-openmp-2019.4        |              243         876 KB
+    keras-applications-1.0.8   |             py_0          33 KB
+    keras-preprocessing-1.1.0  |             py_1          36 KB
+    libprotobuf-3.8.0          |       hd408876_0         4.7 MB
+    markdown-3.1.1             |           py37_0         113 KB
+    mkl-2019.4                 |              243       204.1 MB
+    mkl-service-2.0.2          |   py37h7b6447c_0          70 KB
+    mkl_fft-1.0.14             |   py37ha843d7b_0         172 KB
+    numpy-1.16.4               |   py37h7e9f1db_0          49 KB
+    numpy-base-1.16.4          |   py37hde5b4d6_0         4.4 MB
+    protobuf-3.8.0             |   py37he6710b0_0         693 KB
+    scipy-1.3.1                |   py37h7c811a0_0        18.1 MB
+    tensorboard-1.14.0         |   py37hf484d3e_0         3.2 MB
+    tensorflow-1.14.0          |mkl_py37h45c423b_0           4 KB
+    tensorflow-base-1.14.0     |mkl_py37h7ce6ba3_0       117.4 MB
+    tensorflow-estimator-1.14.0|             py_0         291 KB
+    termcolor-1.1.0            |           py37_1           7 KB
+    werkzeug-0.15.5            |             py_0         256 KB
+    wrapt-1.11.2               |   py37h7b6447c_0          49 KB
+    ------------------------------------------------------------
+                                           Total:       355.9 MB
+
+The following NEW packages will be INSTALLED:
+
+  _tflow_select      pkgs/main/linux-64::_tflow_select-2.3.0-mkl
+  absl-py            pkgs/main/linux-64::absl-py-0.7.1-py37_0
+  astor              pkgs/main/linux-64::astor-0.8.0-py37_0
+  blas               pkgs/main/linux-64::blas-1.0-mkl
+  c-ares             pkgs/main/linux-64::c-ares-1.15.0-h7b6447c_1001
+  gast               pkgs/main/linux-64::gast-0.2.2-py37_0
+  google-pasta       pkgs/main/noarch::google-pasta-0.1.7-py_0
+  grpcio             pkgs/main/linux-64::grpcio-1.16.1-py37hf8bcb03_1
+  h5py               pkgs/main/linux-64::h5py-2.9.0-py37h7918eee_0
+  hdf5               pkgs/main/linux-64::hdf5-1.10.4-hb1b8bf9_0
+  intel-openmp       pkgs/main/linux-64::intel-openmp-2019.4-243
+  keras-applications pkgs/main/noarch::keras-applications-1.0.8-py_0
+  keras-preprocessi~ pkgs/main/noarch::keras-preprocessing-1.1.0-py_1
+  libgfortran-ng     pkgs/main/linux-64::libgfortran-ng-7.3.0-hdf63c60_0
+  libprotobuf        pkgs/main/linux-64::libprotobuf-3.8.0-hd408876_0
+  markdown           pkgs/main/linux-64::markdown-3.1.1-py37_0
+  mkl                pkgs/main/linux-64::mkl-2019.4-243
+  mkl-service        pkgs/main/linux-64::mkl-service-2.0.2-py37h7b6447c_0
+  mkl_fft            pkgs/main/linux-64::mkl_fft-1.0.14-py37ha843d7b_0
+  mkl_random         pkgs/main/linux-64::mkl_random-1.0.2-py37hd81dba3_0
+  numpy              pkgs/main/linux-64::numpy-1.16.4-py37h7e9f1db_0
+  numpy-base         pkgs/main/linux-64::numpy-base-1.16.4-py37hde5b4d6_0
+  protobuf           pkgs/main/linux-64::protobuf-3.8.0-py37he6710b0_0
+  scipy              pkgs/main/linux-64::scipy-1.3.1-py37h7c811a0_0
+  six                pkgs/main/linux-64::six-1.12.0-py37_0
+  tensorboard        pkgs/main/linux-64::tensorboard-1.14.0-py37hf484d3e_0
+  tensorflow         pkgs/main/linux-64::tensorflow-1.14.0-mkl_py37h45c423b_0
+  tensorflow-base    pkgs/main/linux-64::tensorflow-base-1.14.0-mkl_py37h7ce6ba3_0
+  tensorflow-estima~ pkgs/main/noarch::tensorflow-estimator-1.14.0-py_0
+  termcolor          pkgs/main/linux-64::termcolor-1.1.0-py37_1
+  werkzeug           pkgs/main/noarch::werkzeug-0.15.5-py_0
+  wrapt              pkgs/main/linux-64::wrapt-1.11.2-py37h7b6447c_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+libprotobuf-3.8.0    | 4.7 MB    | ######################################################### | 100% 
+absl-py-0.7.1        | 157 KB    | ######################################################### | 100% 
+markdown-3.1.1       | 113 KB    | ######################################################### | 100% 
+keras-preprocessing- | 36 KB     | ######################################################### | 100% 
+numpy-1.16.4         | 49 KB     | ######################################################### | 100% 
+tensorflow-base-1.14 | 117.4 MB  | ######################################################### | 100% 
+grpcio-1.16.1        | 1.0 MB    | ######################################################### | 100% 
+astor-0.8.0          | 45 KB     | ######################################################### | 100% 
+mkl_fft-1.0.14       | 172 KB    | ######################################################### | 100% 
+google-pasta-0.1.7   | 41 KB     | ######################################################### | 100% 
+tensorboard-1.14.0   | 3.2 MB    | ######################################################### | 100% 
+werkzeug-0.15.5      | 256 KB    | ######################################################### | 100% 
+keras-applications-1 | 33 KB     | ######################################################### | 100% 
+numpy-base-1.16.4    | 4.4 MB    | ######################################################### | 100% 
+c-ares-1.15.0        | 102 KB    | ######################################################### | 100% 
+scipy-1.3.1          | 18.1 MB   | ######################################################### | 100% 
+wrapt-1.11.2         | 49 KB     | ######################################################### | 100% 
+gast-0.2.2           | 137 KB    | ######################################################### | 100% 
+protobuf-3.8.0       | 693 KB    | ######################################################### | 100% 
+tensorflow-1.14.0    | 4 KB      | ######################################################### | 100% 
+intel-openmp-2019.4  | 876 KB    | ######################################################### | 100% 
+mkl-2019.4           | 204.1 MB  | ######################################################### | 100% 
+termcolor-1.1.0      | 7 KB      | ######################################################### | 100% 
+_tflow_select-2.3.0  | 2 KB      | ######################################################### | 100% 
+mkl-service-2.0.2    | 70 KB     | ######################################################### | 100% 
+tensorflow-estimator | 291 KB    | ######################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(astrodash) [mdobson@minnesota python_scripts]$ astrodash
+Warning: You will need to install 'PyQt5' if you want to use the graphical interface. Using the automatic library will continue to work.
+Pandas module not installed. DASH will use numpy to load spectral files instead. This can be up to 10x slower.
+Warning: You will need to install 'PyQt5' if you want to use the graphical interface. Using the automatic library will continue to work.
+Traceback (most recent call last):
+  File "/home/mdobson/anaconda3/envs/astrodash/bin/astrodash", line 10, in <module>
+    sys.exit(run_gui())
+  File "/home/mdobson/anaconda3/envs/astrodash/lib/python3.7/site-packages/astrodash/__init__.py", line 33, in run_gui
+    app = QtGui.QApplication(sys.argv)
+NameError: name 'QtGui' is not defined
+(astrodash) [mdobson@minnesota python_scripts]$ conda remove qt
+Collecting package metadata (repodata.json): done
+Solving environment: failed
+
+PackagesNotFoundError: The following packages are missing from the target environment:
+  - qt
+
+
+(astrodash) [mdobson@minnesota python_scripts]$ conda install qt
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/mdobson/anaconda3/envs/astrodash
+
+  added / updated specs:
+    - qt
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    libpng-1.6.37              |       hbc83047_0         364 KB
+    libxml2-2.9.9              |       hea5a465_1         2.0 MB
+    ------------------------------------------------------------
+                                           Total:         2.3 MB
+
+The following NEW packages will be INSTALLED:
+
+  dbus               pkgs/main/linux-64::dbus-1.13.6-h746ee38_0
+  expat              pkgs/main/linux-64::expat-2.2.6-he6710b0_0
+  fontconfig         pkgs/main/linux-64::fontconfig-2.13.0-h9420a91_0
+  freetype           pkgs/main/linux-64::freetype-2.9.1-h8a8886c_1
+  glib               pkgs/main/linux-64::glib-2.56.2-hd408876_0
+  gst-plugins-base   pkgs/main/linux-64::gst-plugins-base-1.14.0-hbbd80ab_1
+  gstreamer          pkgs/main/linux-64::gstreamer-1.14.0-hb453b48_1
+  icu                pkgs/main/linux-64::icu-58.2-h9c2bf20_1
+  jpeg               pkgs/main/linux-64::jpeg-9b-h024ee3a_2
+  libpng             pkgs/main/linux-64::libpng-1.6.37-hbc83047_0
+  libuuid            pkgs/main/linux-64::libuuid-1.0.3-h1bed415_2
+  libxcb             pkgs/main/linux-64::libxcb-1.13-h1bed415_1
+  libxml2            pkgs/main/linux-64::libxml2-2.9.9-hea5a465_1
+  pcre               pkgs/main/linux-64::pcre-8.43-he6710b0_0
+  qt                 pkgs/main/linux-64::qt-5.9.7-h5867ecd_1
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+libpng-1.6.37        | 364 KB    | ######################################################### | 100% 
+libxml2-2.9.9        | 2.0 MB    | ######################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(astrodash) [mdobson@minnesota python_scripts]$ conda install pyqt
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/mdobson/anaconda3/envs/astrodash
+
+  added / updated specs:
+    - pyqt
+
+
+The following NEW packages will be INSTALLED:
+
+  pyqt               pkgs/main/linux-64::pyqt-5.9.2-py37h05f1152_2
+  sip                pkgs/main/linux-64::sip-4.19.8-py37hf484d3e_0
+
+
+Proceed ([y]/n)? y
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(astrodash) [mdobson@minnesota python_scripts]$ astrodash
+Pandas module not installed. DASH will use numpy to load spectral files instead. This can be up to 10x slower.
+(astrodash) [mdobson@minnesota python_scripts]$ pip install pandas
+Collecting pandas
+  Downloading https://files.pythonhosted.org/packages/7e/ab/ea76361f9d3e732e114adcd801d2820d5319c23d0ac5482fa3b412db217e/pandas-0.25.1-cp37-cp37m-manylinux1_x86_64.whl (10.4MB)
+     |████████████████████████████████| 10.4MB 2.8MB/s 
+Requirement already satisfied: python-dateutil>=2.6.1 in /home/mdobson/anaconda3/envs/astrodash/lib/python3.7/site-packages (from pandas) (2.8.0)
+Collecting pytz>=2017.2 (from pandas)
+  Downloading https://files.pythonhosted.org/packages/87/76/46d697698a143e05f77bec5a526bf4e56a0be61d63425b68f4ba553b51f2/pytz-2019.2-py2.py3-none-any.whl (508kB)
+     |████████████████████████████████| 512kB 75.3MB/s 
+Requirement already satisfied: numpy>=1.13.3 in /home/mdobson/anaconda3/envs/astrodash/lib/python3.7/site-packages (from pandas) (1.17.1)
+Requirement already satisfied: six>=1.5 in /home/mdobson/anaconda3/envs/astrodash/lib/python3.7/site-packages (from python-dateutil>=2.6.1->pandas) (1.12.0)
+Installing collected packages: pytz, pandas
+Successfully installed pandas-0.25.1 pytz-2019.2
+(astrodash) [mdobson@minnesota python_scripts]$ astrodash
+

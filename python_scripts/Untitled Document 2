@@ -1,0 +1,62 @@
+############################ FOR CYAN FILTER ##############################
+
+
+sq_diff_sum_o = np.zeros(len(dates_o))
+denom_o = np.zeros(len(dates_o))
+
+counter_o = 0
+
+for i in range(0, len(dates_o)):
+
+	flux_counter_sd_o = 0
+
+	for j in range(counter_o, len(time_o)):
+
+		flux_counter_sd_o = 0
+
+		if math.floor(time_o[j]) == dates_o[i]:
+
+			diff_from_mean = 0
+			
+			diff_from_mean = flux_o[j] - flux_weighted_mean_o[i]
+
+			squared_diff_from_mean = diff_from_mean**2
+
+			sq_diff_sum_o[i] += squared_diff_from_mean
+
+			flux_counter_sd_o += 1
+			
+			denom_o[i] += flux_counter_sd_o
+
+			counter_o += 1
+
+print()
+print("cyan square difference sum")
+print(sq_diff_sum_o)
+print("cyan denominators")
+print(denom_o)
+print()
+
+denominators_o = np.zeros(len(dates_o))
+
+for i in range(0, len(denom_o)):
+
+	denominators_o[i] = denom_o[i]-1
+
+print("cyan denominators minus one")
+print(denominators_o)
+print()
+
+var_o = np.zeros(len(dates_o))
+stdev_o = np.zeros(len(dates_o))
+
+for i in range(0, len(dates_o)):
+
+	var_o[i] = sq_diff_sum_o[i] / denominators_o[i]
+	
+	stdev_o[i] = var_o[i]**(1/2)
+
+print("cyan flux standard deviations")
+print(stdev_o)
+print()
+

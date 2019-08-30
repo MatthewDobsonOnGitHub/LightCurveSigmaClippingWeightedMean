@@ -1,0 +1,90 @@
+(base) [mdobson@minnesota ~]$ ssh mmd@starbase.mp.qub.ac.uk
+Last login: Wed Aug 14 16:33:57 2019 from minnesota.mp.qub.ac.uk
+[mmd@starbase ~]$ cd /home/sne/archive/objects
+[mmd@starbase objects]$ ls
+0G07AGF  2012aw                 OT_2006_M85      PS1-2009-F-002
+0G10AAC  2013dg                 OT_2008_NGC300   PS15ae
+0I10aeu  2014af                 OT_2009_UGC2773  PS15dpn
+2007bg   2014af_old             Paaj             PS15dpna
+2007bi   2016ija                PS1-000037       PS16cgx
+2008cn   2017egm                PS1-0909007      PS18kh
+2008ip   2018cow                PS1_0B04aag      PTF10hgi
+2008S    ASASSN-14dc            PS1-0C06ACU      PTF-11rks
+2009au   AT2017cow              PS1-0D04aaq      ptf13bvn
+2009H    AT2017gfo              PS1-0D04aaz      slsn_nebular_spectra
+2009ip   AT2018cow              PS1-1000026      SN2011fe
+2009jh   ATLAS17aeu             PS1-1000031      SN2012A
+2009kf   ATLAS17fue             PS1-100038       SN2016gkg
+2009kr   ATLAS18aat             PS1-1000382      SN2017ens_ATLAS17gqa
+2009md   CSS111230              PS1-1000383      SN2017iuk_ePESSTO
+2009N    Gaia16apd_ATLAS16avw   PS1-1001347      SN2017iuk_Ic_GRB
+2009T    GW170817_NGC4993       PS1-1001597      SN2018bsz
+2010ab   iPTF13ajg              PS1-10ahf        SN2018ibb
+2010aj   LSQ13ddu               PS1-10pm         SN2018kzr
+2010al   LSQ13fn                PS1-11ap         SN2019gsc
+2010ay   LSQ14an                PS1-11xk         SN2019gwg
+2010gi   LSQ14bdq               PS1-12arh        SN2019hzu
+2010gx   LSQ14mo                PS1-12fo         SN2019leu
+2010O    LT_classification.txt  PS1-12in         SN2019muj
+2011fu   OGLE-2013-SN-079       PS1-2009-A-417   SNHunt175
+[mmd@starbase objects]$ cd SN2018kzr
+[mmd@starbase SN2018kzr]$ ls
+all_spectra   Lbol                        NTT       Xshooter_host_44days
+ATLAS_forced  mdobson                     redshift
+GMOS          mhuber                      SALT
+GROND         nebular_spectra_galaxy_sub  Xshooter
+[mmd@starbase SN2018kzr]$ cd mdobson
+[mmd@starbase mdobson]$ ls
+SN2018kzr
+[mmd@starbase mdobson]$ cd SN2018kzr
+[mmd@starbase SN2018kzr]$ ls
+ATLAS
+[mmd@starbase SN2018kzr]$ cd ATLAS
+[mmd@starbase ATLAS]$ cd
+[mmd@starbase ~]$ cd ATLAS
+-bash: cd: ATLAS: No such file or directory
+[mmd@starbase ~]$ cd /home/sne/archive/objects
+[mmd@starbase objects]$ cd SN2018kzr
+[mmd@starbase SN2018kzr]$ cd mdobson
+[mmd@starbase mdobson]$ cd SN2018kzr
+[mmd@starbase SN2018kzr]$ cd ATLAS
+[mmd@starbase ATLAS]$ ls
+SN2018kzr_flux_vs_time_ATLAS_hawaii.pdf
+SN2018kzr_flux_weighted_mean_with_hawaii.txt
+[mmd@starbase ATLAS]$ pwd
+/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/ATLAS
+[mmd@starbase ATLAS]$ exit
+logout
+Connection to starbase.mp.qub.ac.uk closed.
+(base) [mdobson@minnesota ~]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk: /home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/ATLAS
+/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/ATLAS: No such file or directory
+(base) [mdobson@minnesota ~]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk: /home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr
+/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr: No such file or directory
+(base) [mdobson@minnesota ~]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk: /home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/
+/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/: No such file or directory
+(base) [mdobson@minnesota ~]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk:/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/
+SN2018kzr: No such file or directory
+(base) [mdobson@minnesota ~]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk:/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr
+SN2018kzr: No such file or directory
+(base) [mdobson@minnesota ~]$ cd /home/mdobson/Archives/Objects/SN2018kzr
+-bash: cd: /home/mdobson/Archives/Objects/SN2018kzr: No such file or directory
+(base) [mdobson@minnesota ~]$ cd /home/mdobson/Archive/Objects/SN2018kzr
+(base) [mdobson@minnesota SN2018kzr]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk:/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr
+SN2018kzr: No such file or directory
+(base) [mdobson@minnesota SN2018kzr]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk: /home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr
+/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr: No such file or directory
+(base) [mdobson@minnesota SN2018kzr]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk:/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr
+SN2018kzr: No such file or directory
+(base) [mdobson@minnesota SN2018kzr]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk:/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr/
+SN2018kzr: No such file or directory
+(base) [mdobson@minnesota SN2018kzr]$ cd ..
+(base) [mdobson@minnesota Objects]$ scp -rp SN2018kzr mmd@starbase.mp.qub.ac.uk:/home/sne/archive/objects/SN2018kzr/mdobson/SN2018kzr
+SN2018kzr_flux_vs_time_ATLAS_hawaii.pdf                                                                                                 100%   61KB  17.4MB/s   00:00    
+SN2018kzr_flux_weighted_mean.txt                                                                                                        100%   18KB   9.4MB/s   00:00    
+SN2018kzr_flux_weighted_mean_clipped.txt                                                                                                100%   11KB   6.6MB/s   00:00    
+SN2018kzr_flux_vs_time.pdf                                                                                                              100%   34KB  16.9MB/s   00:00    
+SN2018kzr_flux_weighted_mean_with_hawaii.txt                                                                                            100%   21KB  10.6MB/s   00:00    
+SN2018kzr_flux_vs_time_clipped.pdf                                                                                                      100%   28KB  14.4MB/s   00:00    
+(base) [mdobson@minnesota Objects]$ ^C
+(base) [mdobson@minnesota Objects]$ 
+

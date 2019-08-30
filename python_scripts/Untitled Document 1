@@ -1,0 +1,22 @@
+# STANDARD DEVIATION FUNCTION (WILL BE USEFUL LATER)
+
+# The error bars for the mean magnitude values for each day will be the standard deviation fo all the averaged values.
+
+def standard_deviation(binned_values, mean, number):
+
+# standard deviation is equal to the square root of the variance, which is the sum of the squares of the differences between each measured value and the mean, divided by the number of values minus one.
+	divisor = number - 1
+
+	summ = 0
+
+	for i in range(0, len(binned_values)):
+		
+		diff = binned_values[i] - mean
+		sqdiff = diff^2
+		summ = summ + sqdiff
+
+	variance = summ / divisor
+
+	sigma = math.sqrt(variance)
+
+	return sigma
