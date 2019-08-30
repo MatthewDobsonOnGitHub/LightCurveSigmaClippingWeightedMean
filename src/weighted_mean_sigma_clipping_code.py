@@ -11,6 +11,7 @@ import statistics as stat
 import os
 import sys
 
+############### WEIGHTED MEAN AND SIGMA CLIPPING OF SUPERNOVA FLUX DATA ###############	
 
 ######### STANDARD DEVIATION FUNCTION #########
 # The standard deviation is equal to the square root of the ratio of the sum of the square of the differences of each data point in a day compared to the mean, to the number of data points in a day minus one. We would normally use the built-in Python standard deviation function, but for some days we have only a single measurement, and wish to keep its intrinsic uncertainty as the 'standard deviation' of that day's weighted mean flux value.
