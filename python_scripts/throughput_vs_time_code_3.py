@@ -43,6 +43,7 @@ def general_code(filename, telescope):
 
 	for row in reader:
 
+		row["FILE"] = row["FILE"].strip()
 		row["FILTER"] = row["FILTER"].strip()
 
 		#for k,v in row[0].items():
@@ -76,7 +77,7 @@ def general_code(filename, telescope):
 				cdict[row["MJD-OBS"]] = []
 				cdict[row["MJD-OBS"]].append(dict(row))
 
-		print(row)
+		#print(row)
 		#sys.exit(0)
 
 	# By this stage, we have two dictionaries - one for each filter - that contain data about every measurement made for that telescope. Each key:value pair takes the format: mjd-date of obervation : data in a dictionary. Now, we define two empty dictionaries for the extracted data of time and throughput. 
@@ -113,23 +114,26 @@ def general_code(filename, telescope):
 	data_o["Magnitude ZeroPoint"] = magzpt_o
 	data_c["Magnitude ZeroPoint"] = magzpt_c
 
-	print(data_o["Time (MJD)"])
-	print(data_c["Time (MJD)"])
-	print(data_o["Magnitude ZeroPoint"])
-	print(data_c["Magnitude ZeroPoint"])
+	#print(data_o["Time (MJD)"])
+	#print(data_c["Time (MJD)"])
+	#print(data_o["Magnitude ZeroPoint"])
+	#print(data_c["Magnitude ZeroPoint"])
 
 
 	##################### DATA PLOTTING ########################
 	# Now, we plot the data on the graph. 
 	# linestyle determies the style of the line that joins the data points; here, we leave it blank, so no line is formed.
 
-	plt.figure("Throughput vs Time - " + telescope, figsize = [7,7])
+	plt.figure("Throughput vs Time - " + telescope)
 
-	plt.plot(data_o["Time (MJD)"], data_o["Magnitude ZeroPoint"], 'o', color='orange', alpha = 0.4)
-	plt.plot(data_c["Time (MJD)"], data_c["Magnitude ZeroPoint"], 'o', color='c', alpha = 0.4)
+	plt.errorbar(data_o["Time (MJD)"], data_o["Magnitude ZeroPoint"], fmt='o', color='orange', alpha = 0.4, markersize = 0.5)
+	plt.errorbar(data_c["Time (MJD)"], data_c["Magnitude ZeroPoint"], fmt='o', color='c', alpha = 0.4, markersize = 0.5)
 
 	plt.xlabel('MJD')
-	plt.ylabel('Transient Flux ($\mu$Jy)')
+	plt.ylabel('Zero Point Magnitude')
+
+	#plt.xlim((,))
+	plt.ylim((21,23))
 
 	plt.minorticks_on()
 	plt.grid(which='major', linestyle=':')
