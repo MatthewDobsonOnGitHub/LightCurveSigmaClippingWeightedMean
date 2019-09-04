@@ -287,14 +287,6 @@ def general_code(filename, determiner, supernova):
 	# We can read in the data as a set of dictionaries; a row in the original data file contains a list of data pairs: a key and its associated value
 	# We define the name of the supernova under study as a string, to be concatenated to the files this code produces, and to identify which data files to read in.
 
-
-	# This code will produce a plot of flux vs time, and a text file of calculated data; both of these will be stored in a directory, which we define here. 
-	directory = '/home/mdobson/Archive/Objects/' + supernova + '/ATLAS/'
-
-	# If this directory (file) does not already exist, we can created it using the code here.
-	if not os.path.exists(directory):
-		os.makedirs(directory)
-
 	# However, there are two formats fo data which can be used: 1) the Forced Photometry data taken from the ATLAS website; or 2) the Forced Photometry data that is output from the forced.sh file. The file contents are different; the first requires calculation of flux from other quantities in the file, the second already has accurate flux values in the file which only need to be read.
 
 	# each row in the datafile becomes its own row; 'reader' contains many dictionaries. Each dictionary is an 'ordered dictionary'.
@@ -414,7 +406,7 @@ def general_code(filename, determiner, supernova):
 	# There is a known method of doing this: we calculate the standard deviation and the median of every measurement for a given day, and check to see whether every data point lies within one s.d. from the median. If not, any outlying points (beyond 3 s.d. of the median) are discarded.
 	# The process is repeated; a new s.d. and median calculated for the remaining points - and continues until every point for a day lies within 1 s.d. from the median.
 	# Ideally, we would use a do...while loop, but that is not possible with the Python language. Instead, we write the code to be run first, then duplicate it in a while loop that follows the initial instance of code. In a sense, the loop performs an initial round of clipping and then checks whether or not to proceed.
-	# Just in case, a good thing to do would be to define the number of standard deviations beyond which data points should be clipped. Normally, it is one sigma, but sometimes it could be more.
+	# Just in case, a good thing to do would be to define the number of standard deviations beyond which data points should be clipped. Normally, it is three sigma, but sometimes it could be more.
 
 	number_sigma = 3
 
@@ -461,7 +453,7 @@ def general_code(filename, determiner, supernova):
 	##################################### DATA WRITING #####################################
 	# Write the data plotted to a .txt file
 
-	filename_2 = directory + supernova + '_flux_weighted_mean_clipped.txt'
+	filename_2 = supernova + '_flux_weighted_mean_clipped.txt'
 
 	data_raw_o = np.array([raw_data_o["Time"], raw_data_o["Flux"], raw_data_o["STDEV"]])
 	data_raw_c = np.array([raw_data_c["Time"], raw_data_c["Flux"], raw_data_c["STDEV"]])
@@ -474,7 +466,7 @@ def general_code(filename, determiner, supernova):
 	data_wei_o = data_wei_o.T
 	data_wei_c = data_wei_c.T
 
-	note = 'SN2019XXXXX forced photometry from ATLAS\n=============================================\nForced photometry values for individual 30s exposures in orange (o) and cyan (c) are provided in the long table. The measurements are are in a flux unit, not magnitudes. But conversion is simple. \nThe flux unit used is microJanskys, so AB mags are just\n\nm_AB  = -2.5*log(Flux * 10^-6) + 8.9\n\nThe error in m_AB can be calculated as above. Of course, will not be meangingful when the significance is < 3 sigma.\nIn those cases, the n-sigma upper limit (you can chose n) can be estimated from \n\n m_AB (n-sigma upper limit) > -2.5*log(n * Flux_error * 10^-6) + 8.9 \n\nIn the two other tables, the multiple measurements per night have been combined into a nightly mean. It is a weighted mean, with the points weighted by the inverse variance. The number of 30s exposures which were combined together is given in the last column. There are a small number of outliers, which you will see. You can ignore these rogue points toward the end of the lightcurve,  as you probably have good larger aperture coverage there (nothing  rogue at the critical early discovery phases).'
+	note = 'SN2019XXXXX forced photometry from ATLAS\n=============================================\nForced photometry values for individual 30s exposures in orange (o) and cyan (c) are provided in the long table. The measurements are are in a flux unit, not magnitudes. But conversion is simple. \nThe flux unit used is microJanskys, so AB mags are just\n\nm_AB  = -2.5*log(Flux * 10^-6) + 8.9\n\nThe error in m_AB can be calculated as above. Of course, will not be meangingful when the significance is < 3 sigma.\nIn those cases, the n-sigma upper limit (you can chose n) can be estimated from \n\n m_AB (n-sigma upper limit) > -2.5*log(n * Flux_error * 10^-6) + 8.9 \n\nIn the two other tables, the multiple measurements per night have been combined into a nightly mean. It is a weighted mean, with the points weighted by the inverse variance. The number of 30s exposures which were combined together is given in the last column. There are a small number of outliers, which you will see.'
 
 	with open(filename_2, 'w') as datafile_id:
 	# here, you open the ascii file
@@ -543,7 +535,7 @@ def general_code(filename, determiner, supernova):
 	plt.grid(which='major', linestyle=':')
 	plt.grid(which='minor', linestyle=':')
 
-	fig_name = directory + supernova + '_flux_vs_time_raw_weighted_clipped.pdf'
+	fig_name = supernova + '_flux_vs_time_raw_weighted_clipped.pdf'
 
 	# Before plotting the figure, we save it
 	plt.savefig(fig_name)
