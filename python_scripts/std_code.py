@@ -1,7 +1,19 @@
+#!/usr/bin/env python
+#
+# Load in the necessary libraries (importing them as smaller strings for brevity).
+
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import pylab
+import csv
+import sys
+import statistics as stat
+
 def standard_deviation(array):
 
 
-	mu = stat.mean(array)
+	mu = sum(array)/len(array)
 	summ = 0
 	denominator = len(array)-1
 

@@ -471,10 +471,10 @@ def general_code(filename, determiner, supernova):
 	with open(filename_2, 'w') as datafile_id:
 	# here, you open the ascii file
 		
-		np.savetxt(datafile_id, data_raw_o, fmt=['%s','%s','%s'], delimiter='\t\t', header=note + '\n\n\n\nTime (MJD), Flux and Flux Error (microjanskys) for Orange Filter (Raw data)',footer='\n\n\n')
-		np.savetxt(datafile_id, data_raw_c, fmt=['%s','%s','%s'], delimiter='\t\t', header='Time (MJD), Flux and Flux Error (microjanskys) for Cyan Filter (Raw data)',footer='\n\n\n')
-		np.savetxt(datafile_id, data_wei_o, fmt=['%s','%s','%s','%d'], delimiter='\t\t', header='Time (MJD), Flux, Flux Error (microjanskys) and No. Measurements per Weighted Mean for Orange Filter (Weighted Averages)', footer='\n\n\n')
-		np.savetxt(datafile_id, data_wei_c, fmt=['%s','%s','%s','%d'], delimiter='\t\t', header='Time (MJD), Flux, Flux Error (microjanskys) and No. Measurements per Weighted Mean for Cyan Filter (Weighted Averages)', footer='\n\n\n')
+		np.savetxt(datafile_id, data_raw_o, fmt=['%.5f','%f','%f'], delimiter='\t\t', header=note + '\n\n\n\nTime (MJD), Flux and Flux Error (microjanskys) for Orange Filter (Raw data)',footer='\n\n\n')
+		np.savetxt(datafile_id, data_raw_c, fmt=['%.5f','%f','%f'], delimiter='\t\t', header='Time (MJD), Flux and Flux Error (microjanskys) for Cyan Filter (Raw data)',footer='\n\n\n')
+		np.savetxt(datafile_id, data_wei_o, fmt=['%.5f','%f','%f','%d'], delimiter='\t\t', header='Time (MJD), Flux, Flux Error (microjanskys) and No. Measurements per Weighted Mean for Orange Filter (Weighted Averages)', footer='\n\n\n')
+		np.savetxt(datafile_id, data_wei_c, fmt=['%.5f','%f','%f','%d'], delimiter='\t\t', header='Time (MJD), Flux, Flux Error (microjanskys) and No. Measurements per Weighted Mean for Cyan Filter (Weighted Averages)', footer='\n\n\n')
 
 
 	##################################### DATA PLOTTING #####################################
@@ -488,8 +488,36 @@ def general_code(filename, determiner, supernova):
 
 	plt.subplots_adjust(hspace=0.7, wspace=0)
 
+	plt.subplot(311)
+	plt.subplot(311).set_title("Individual 30s Exposure Flux")
+
+	plt.errorbar(raw_data_o["Time"], raw_data_o["Flux"], yerr=raw_data_o["STDEV"], fmt='o', color='orange', alpha = 0.4, capsize=5)
+	plt.errorbar(raw_data_c["Time"], raw_data_c["Flux"], yerr=raw_data_c["STDEV"], fmt='o', color='c', alpha = 0.4, capsize=5)
+
+	plt.xlabel('MJD')
+	plt.ylabel('Transient Flux ($\mu$Jy)')
+
+	plt.minorticks_on()
+	plt.grid(which='major', linestyle=':')
+	plt.grid(which='minor', linestyle=':')
+
+	plt.subplot(312)
+	plt.subplot(312).set_title("Weighted Mean Flux")
+
+	plt.errorbar(mean_data_o["Time"], mean_data_o["Flux"], yerr=mean_data_o["Error"], fmt='o', color='red', capsize=5)
+	plt.errorbar(mean_data_c["Time"], mean_data_c["Flux"], yerr=mean_data_c["Error"], fmt='o', color='blue', capsize=5)
+	plt.errorbar(raw_data_o["Time"], raw_data_o["Flux"], yerr=raw_data_o["STDEV"], fmt='o', color='orange', alpha = 0.2, capsize=5)
+	plt.errorbar(raw_data_c["Time"], raw_data_c["Flux"], yerr=raw_data_c["STDEV"], fmt='o', color='c', alpha = 0.2, capsize=5)
+
+	plt.xlabel('MJD')
+	plt.ylabel('Transient Flux ($\mu$Jy)')
+
+	plt.minorticks_on()
+	plt.grid(which='major', linestyle=':')
+	plt.grid(which='minor', linestyle=':')
+
 	plt.subplot(313)
-	plt.subplot(313).set_title("Weighted Clipped Data")
+	plt.subplot(313).set_title("Weighted Mean Flux with 3-Sigma Clipping")
 
 	plt.errorbar(clipped_mean_data_o["Time"], clipped_mean_data_o["Flux"], yerr=clipped_mean_data_o["Error"], fmt='o', color='red', capsize=5)
 	plt.errorbar(clipped_mean_data_c["Time"], clipped_mean_data_c["Flux"], yerr=clipped_mean_data_c["Error"], fmt='o', color='blue', capsize=5)
@@ -506,34 +534,6 @@ def general_code(filename, determiner, supernova):
 
 	#plt.xlim([,])
 	#plt.ylim([-100,325])
-
-	plt.subplot(312)
-	plt.subplot(312).set_title("Weighted Data")
-
-	plt.errorbar(mean_data_o["Time"], mean_data_o["Flux"], yerr=mean_data_o["Error"], fmt='o', color='red', capsize=5)
-	plt.errorbar(mean_data_c["Time"], mean_data_c["Flux"], yerr=mean_data_c["Error"], fmt='o', color='blue', capsize=5)
-	plt.errorbar(raw_data_o["Time"], raw_data_o["Flux"], yerr=raw_data_o["STDEV"], fmt='o', color='orange', alpha = 0.2, capsize=5)
-	plt.errorbar(raw_data_c["Time"], raw_data_c["Flux"], yerr=raw_data_c["STDEV"], fmt='o', color='c', alpha = 0.2, capsize=5)
-
-	plt.xlabel('MJD')
-	plt.ylabel('Transient Flux ($\mu$Jy)')
-
-	plt.minorticks_on()
-	plt.grid(which='major', linestyle=':')
-	plt.grid(which='minor', linestyle=':')
-
-	plt.subplot(311)
-	plt.subplot(311).set_title("Raw Data")
-
-	plt.errorbar(raw_data_o["Time"], raw_data_o["Flux"], yerr=raw_data_o["STDEV"], fmt='o', color='orange', alpha = 0.4, capsize=5)
-	plt.errorbar(raw_data_c["Time"], raw_data_c["Flux"], yerr=raw_data_c["STDEV"], fmt='o', color='c', alpha = 0.4, capsize=5)
-
-	plt.xlabel('MJD')
-	plt.ylabel('Transient Flux ($\mu$Jy)')
-
-	plt.minorticks_on()
-	plt.grid(which='major', linestyle=':')
-	plt.grid(which='minor', linestyle=':')
 
 	fig_name = supernova + '_flux_vs_time_raw_weighted_clipped.pdf'
 
