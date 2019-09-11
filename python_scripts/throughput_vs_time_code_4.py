@@ -25,7 +25,7 @@ def general_code1(filename, telescope):
 
 	# This code will produce a plot of zero point magnitude (or some other quantifier of throughput) against time. We want to store it in a directory, which we define here:
 
-	directory = '/home/mdobson/Archive/ObservationData/' + telescope + '/ATLAS/'
+	directory = '/home/mdobson/Archive/ObservationData/' + telescope + '/ATLAS/ToPresent/'
 
 	# If this directory (file) does not already exist, we can created it using the code here.
 	if not os.path.exists(directory):
@@ -172,7 +172,7 @@ def general_code2(filename, telescope):
 
 	# This code will produce a plot of zero point magnitude (or some other quantifier of throughput) against time. We want to store it in a directory, which we define here:
 
-	directory = '/home/mdobson/Archive/ObservationData/' + telescope + '/ATLAS/'
+	directory = '/home/mdobson/Archive/ObservationData/' + telescope + '/ATLAS/ToPresent/'
 
 	# If this directory (file) does not already exist, we can created it using the code here.
 	if not os.path.exists(directory):
@@ -290,7 +290,7 @@ def general_code2(filename, telescope):
 	plt.ylabel('5 Sigma Magnitude')
 
 	#plt.xlim((,))
-	plt.ylim((10,20))
+	plt.ylim((12,22))
 
 	plt.minorticks_on()
 	plt.grid(which='major', linestyle=':')
@@ -316,7 +316,7 @@ def general_code3(filename, telescope):
 
 	# This code will produce a plot of zero point magnitude (or some other quantifier of throughput) against time. We want to store it in a directory, which we define here:
 
-	directory = '/home/mdobson/Archive/ObservationData/' + telescope + '/ATLAS/'
+	directory = '/home/mdobson/Archive/ObservationData/' + telescope + '/ATLAS/ToPresent/'
 
 	# If this directory (file) does not already exist, we can created it using the code here.
 	if not os.path.exists(directory):
@@ -436,7 +436,7 @@ def general_code3(filename, telescope):
 	plt.ylabel('Seeing')
 
 	#plt.xlim((,))
-	plt.ylim((3,15))
+	plt.ylim((2,11))
 
 	plt.minorticks_on()
 	plt.grid(which='major', linestyle=':')
@@ -475,16 +475,18 @@ def main(argv=None):
 
 	confirm = input()
 
-	print()
-	print("Select Measure of Throughput:")
-	print("1. Zero Point Magnitude")
-	print("2. 5 Sigma Magnitude")
-	print("3. 'Seeing'")
-	print("Input 1, 2 or 3 (no spaces)")
 
-	measure = input()
 
 	if confirm == 'y':
+
+		print()
+		print("Select Measure of Throughput:")
+		print("1. Zero Point Magnitude")
+		print("2. 5 Sigma Magnitude")
+		print("3. 'Seeing'")
+		print("Input 1, 2 or 3 (no spaces)")
+
+		measure = input()
 
 		if measure == '1':
 
@@ -498,7 +500,11 @@ def main(argv=None):
 
 			general_code3(filename, telescope)
 
-	return
+		return
+
+	if confirm == 'n':
+
+		return
 
 
 # The double underscore is a python-ism, and has special meaning.
